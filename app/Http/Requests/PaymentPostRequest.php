@@ -13,7 +13,7 @@ class PaymentPostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,14 +24,17 @@ class PaymentPostRequest extends FormRequest
     public function rules()
     {
         return [
+            // 'reference' => 'required',
             'name' => 'required',
             'facebook' => 'required',
             'email' => 'required',
             'contact_number' => 'required',
             'service_availed' => 'required',
             'mode_of_payment' => 'required',
+            'other_mop' => 'nullable',
             'total_amount_paid' => 'required',
             'payment_slip' => 'required',
+            'g-recaptcha-response' => 'required|recaptchav3:verification,0.6'
         ];
     }
 }

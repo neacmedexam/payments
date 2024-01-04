@@ -11,6 +11,6 @@ class Payments extends Model
     protected $table = 'tbl_payments';
     public $timestamps = false;
     protected $fillable  = [
-    	'reference', 'name', 'facebook', 'email', 'contact_number', 'service_availed', 'mode_of_payment', 'total_amount_paid','payment_slip','date_created','created_by'
+    	'reference', 'name', 'facebook', 'email', 'contact_number', 'service_availed', 'mode_of_payment', 'other_mop','total_amount_paid','payment_slip','date_created','created_by'
     ];
 }
