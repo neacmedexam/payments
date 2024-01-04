@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('payments');
 });
+
+// Route::post('/payments/store','PaymentsController@store')->name('payments.store');
+Route::post('/payments/store',[PaymentsController::class,'store'])->name('payments.store');

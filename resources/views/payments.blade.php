@@ -11,7 +11,8 @@
 </head>
 <body class=" m-0 p-0 h-screen w-screen bg-[#e9f3e3] uppercase flex flex-col justify-center items-center ">
   <div class="p-10 h-full w-full lg:max-w-[65%]  ">
-    <div class="p-4 h-full w-full bg-[#86A789]/70 text-[#2f3238] rounded-xl">
+    <form method="POST" action="{{route('payments.store')}}" class="p-4 h-full w-full bg-[#86A789]/70 text-[#2f3238] rounded-xl">
+      @csrf
       <div>
         <p class="font-bold tracking-wide text-4xl text-[#ececec]">NEAC Payments</p>
       <div>
@@ -103,7 +104,8 @@
       <div class="pt-2 flex justify-end">
         <button class="p-2 px-4 border bg-green-600 border-green-600 text-white rounded">Submit</button>
       </div>
-    </div>
+    </form>
+    
     </div>
   </div>
   <script>
