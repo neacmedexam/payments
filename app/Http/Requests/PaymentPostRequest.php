@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 
 class PaymentPostRequest extends FormRequest
 {
@@ -23,6 +24,8 @@ class PaymentPostRequest extends FormRequest
      */
     public function rules()
     {
+    
+  
         return [
             // 'reference' => 'required',
             'name' => 'required',
@@ -34,7 +37,7 @@ class PaymentPostRequest extends FormRequest
             'other_mop' => 'nullable',
             'total_amount_paid' => 'required',
             'payment_slip' => 'required',
-            'g-recaptcha-response' => 'required|recaptchav3:verification,0.6'
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 }

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Payments::class,'show']);
+Route::get('/payment', [Payments::class,'show']);
 
 // Route::post('/payments/store','PaymentsController@store')->name('payments.store');
-Route::post('/payments/store',[Payments::class,'store'])->name('payments.store');
+Route::post('paymentprocess',[Payments::class,'store'])->name('payments.store');

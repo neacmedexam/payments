@@ -19,35 +19,38 @@ class Payments extends Controller
     }
     public function store(PaymentPostRequest $request){
  
+  
 
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
         // generate a pin based on 2 * 7 digits + a random character
         $pin = mt_rand(100000, 999999)
             . mt_rand(100000, 999999)
             . $characters[rand(0, strlen($characters) - 1)];
-
         // shuffle the result
         $string = str_shuffle($pin);
 
         $checkIfExist = ModelsPayments::where('reference', '==',$string)->get();
-        $captcha = $request->validated();
-        $score = RecaptchaV3::verify($captcha['g-recaptcha-response'],'verification');
-        // $score = RecaptchaV3::verify($request->get('g-recaptcha-response'),'register');
-        dd($score);
+     
         try{
             if($checkIfExist->count() == 0){
-                $payments = ModelsPayments::create(array_merge($request->validated(),[
-                    'reference' => $string,
-                    'date_created' => Carbon::now(),
-                    'created_by' => $request->ip(),
-                ]));
-                    
-                return redirect()->back()->with('success', 'Payment Succcessfully'); 
+                if($request->hasFile('payment_slip')){
+                    $request['payment_slip'] = $request->file('payment_slip')->store('upload','public');
+                    $payments = ModelsPayments::create(array_merge($request->validated(),[
+                        'reference' => $string,
+                        'date_created' => Carbon::now(),
+                        'created_by' => $request->ip(),
+                    ]));
+                        
+                    return redirect()->back()->with('success', 'Payment Succcessfully'); 
+                }
+                else{
+                    dd('ekis');
+                }
+         
                 
             } 
             else{
-                return redirect()->back()->with('failed', 'Something went wrong, Please Try Again.');  
+                return redirect()->back()->with('failed', 'Something went wrong. Please Try Again.');  
             }
         }
         catch(\Exception $e){
