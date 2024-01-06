@@ -36,7 +36,7 @@ class PaymentPostRequest extends FormRequest
             'mode_of_payment' => 'required',
             'other_mop' => 'nullable',
             'total_amount_paid' => 'required',
-            'payment_slip' => 'required',
+            'payment_slip' => 'required|mimes:jpeg,jpg,png,heic',
             'g-recaptcha-response' => 'required|captcha'
         ];
     }

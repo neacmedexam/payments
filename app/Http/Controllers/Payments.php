@@ -11,22 +11,18 @@ class Payments extends Controller
 {
     //
 
-    public function show(){
+    public function create(){
 
-     
-   
-        return view('payments');
+        return view('payments.payments');
     }
+
     public function store(PaymentPostRequest $request){
- 
-  
 
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        // generate a pin based on 2 * 7 digits + a random character
         $pin = mt_rand(100000, 999999)
             . mt_rand(100000, 999999)
             . $characters[rand(0, strlen($characters) - 1)];
-        // shuffle the result
+
         $string = str_shuffle($pin);
 
         $checkIfExist = ModelsPayments::where('reference', '==',$string)->get();
@@ -34,17 +30,25 @@ class Payments extends Controller
         try{
             if($checkIfExist->count() == 0){
                 if($request->hasFile('payment_slip')){
-                    $request['payment_slip'] = $request->file('payment_slip')->store('upload','public');
+
+                    $paymentSlipFiles = $request->file('payment_slip');
+                    $paymentSlipPaths = [];
+
+                    foreach ($paymentSlipFiles as $paymentSlipFile) {
+                        $paymentSlipPath = $paymentSlipFile->store('upload', 'public');
+                        $paymentSlipPaths[] = $paymentSlipPath;
+                    }
                     $payments = ModelsPayments::create(array_merge($request->validated(),[
+                        'payment_slip' => implode(',',$paymentSlipPaths),
                         'reference' => $string,
                         'date_created' => Carbon::now(),
                         'created_by' => $request->ip(),
                     ]));
-                        
+
                     return redirect()->back()->with('success', 'Payment Succcessfully'); 
                 }
                 else{
-                    dd('ekis');
+                    dd('no file attached');
                 }
          
                 
@@ -58,5 +62,21 @@ class Payments extends Controller
         }
 
 
+    }
+
+    public function view(){
+        $getAll = ModelsPayments::select('*')->get();
+   
+
+        return view('payments.index',[
+            'record' => $getAll,
+        ]);
+
+    }
+   
+
+    public function edit($id){
+        $getRecord = ModelsPayments::where('id','=',$id)->get();
+        dd($getRecord);
     }
 }

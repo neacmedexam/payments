@@ -1,16 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-  <link rel="icon" href="{{ URL::asset('/image/icon.png') }}" type="image/x-icon"/>
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-  <title>NEAC Payments</title>
-</head>
+@include('components.header')
 <body class=" m-0 p-0 h-screen w-screen bg-[#f9faf9] uppercase flex flex-col justify-center items-center text-[#0d0f0d] ">
   <div class=" lg:p-10 h-full w-full lg:max-w-[65%]  ">
     <div class="w-full p-6 flex flex-col md:flex-row justify-center    text-[#0d0f0d] rounded-lg">
@@ -26,7 +14,7 @@
         </div>
       </div>
       <div class="p-8 sm:px-10 w-full bg-[#96bf91] shadow-xl border=[#96bf91] rounded-2xl text-[#0d0f0d]">
-        <form method="POST" action="{{route('payments.store')}}" enctype="multipart/form-data" >
+        <form method="POST" action="{{route('payments.store')}}" enctype="multipart/form-data"  >
           @csrf
           
           @if(session()->has('success'))
@@ -136,7 +124,7 @@
               @enderror
             </div>
           </div>
-          <div class="text-sm pr-2">
+          {{-- <div class="text-sm pr-2">
                 
             <label class="block text-[#0d0f0d] text-sm font-bold" for="file_input">Upload the Payment Slip<span class="text-xs text-red-600">*</span>
     
@@ -146,6 +134,28 @@
             @error('payment_slip')
               <p class="text-red-600 text-xs whitespace-nowrap">{{$message}}</p>
             @enderror   
+          </div> --}}
+          <div class="text-sm pr-2">
+            <label class="block text-sm text-[#0d0f0d] font-bold" for="payment_slip">
+            Payment Slip
+            </label>
+            <div class="flex items-center justify-center w-full">
+              <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-[#0d0f0d] border-dashed rounded-lg cursor-pointer">
+                <div class="flex flex-col items-center justify-center py-2">
+                
+                    <svg class="mx-auto h-8 w-8 text-[#0d0f0d]" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="upload1 text-xs text-[#0d0f0d] dark:text-[#0d0f0d]"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                    <p class="upload2 text-xs text-[#0d0f0d] dark:text-[#0d0f0d]">JPEG, PNG, JPG or HEIC</p>
+                    <div class="file-name-placeholder font-medium"></div>
+                </div>
+                <input id="dropzone-file" type="file" class="hidden" name="payment_slip[]" onchange="handleFileSelected" multiple />
+              </label>
+            </div> 
+            @error('payment_slip')
+              <p class="text-red-600 text-xs whitespace-nowrap">{{$message}}</p>
+            @enderror  
           </div>
           <div class="py-2 flex flex-col justify-center items-center w-full">
             
@@ -185,6 +195,29 @@
                 document.getElementById("other-div").style.display = 'none';
             }
         }
+
+
+        document.getElementById('dropzone-file').addEventListener('change', handleFileSelected);
+
+function handleFileSelected(event) {
+  const fileNames = [];
+    for (let i = 0; i < event.target.files.length; i++) {
+        fileNames.push(event.target.files[i].name);
+    }
+    // Display the file names
+  // console.log(fileName);
+  const name1 = document.querySelector('.upload1');
+  const name2 = document.querySelector('.upload2');
+  if(fileNames != ''){
+    name1.textContent = '';
+    name2.textContent = '';
+    
+    document.querySelector('.file-name-placeholder').textContent = fileNames.join(', ');
+  }
+
+  // document.querySelector('.file-name-placeholder').textContent = fileName;
+}
+
     </script>
 </body>
 </html>
