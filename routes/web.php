@@ -38,8 +38,9 @@ Route::group(['middleware' => ['auth']], function() {
  
 
     //payment
-    Route::get('view',[Payments::class,'view'])->name('payments.view');
-    Route::get('view/{id}',[Payments::class,'edit'])->name('payments.edit');
+    Route::get('payment/view',[Payments::class,'view'])->name('payments.view');
+    Route::get('payment/view/{id}',[Payments::class,'edit'])->name('payments.edit');
+    Route::put('payment/update/{id}',[Payments::class,'update'])->name('payments.update');
 
     //accounts
     Route::get('accounts',[Accounts::class,'index'])->name('accounts.index');

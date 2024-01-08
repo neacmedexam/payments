@@ -37,7 +37,7 @@ class Accounts extends Controller
 
     protected function authenticated(Request $request, $user) 
     {
-        return redirect('/view');
+        return redirect('/payment/view');
     }
     public function logout(){
         Session::flush();

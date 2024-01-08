@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PaymentPostRequest;
-use App\Models\Payments as ModelsPayments;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\PaymentPostRequest;
+use App\Models\Payments as ModelsPayments;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
+
 class Payments extends Controller
 {
     //
@@ -65,8 +67,8 @@ class Payments extends Controller
     }
 
     public function view(){
-        $getAll = ModelsPayments::select('*')->get();
-   
+        $getAll = ModelsPayments::select('*')->orderBy('id','desc')->simplePaginate(10);
+        
 
         return view('payments.index',[
             'record' => $getAll,
@@ -76,7 +78,35 @@ class Payments extends Controller
    
 
     public function edit($id){
-        $getRecord = ModelsPayments::where('id','=',$id)->get();
-        dd($getRecord);
+        $getRecord = ModelsPayments::find($id);
+        
+
+        return view('payments.edit',[
+            'record' => $getRecord,
+        ]);
+        
+    }
+    
+    public function update(Request $request,$id){
+
+        $user = ModelsPayments::find($id);
+
+        // dd($request->all(),$user->name);
+        $user->update([
+            'date_verified' => $request->input('date_verified'),
+            'amount_deposited_php' => $request->input('amount_deposited_php'),
+            'amount_deposited_usd' => $request->input('amount_deposited_usd'),
+            'date_update_admin' => $request->input('date_update_admin'),
+            'remarks' => $request->input('remarks'),
+        ]);
+
+        if($request->input('date_verified')){
+            $user->update([
+                'payment_verified' => 1,
+                'verified_by' => auth()->user()->name,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Payment Updated!'); 
     }
 }

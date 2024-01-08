@@ -139,7 +139,7 @@
             <label class="block text-sm text-[#0d0f0d] font-bold" for="payment_slip">
             Payment Slip
             </label>
-            <div class="flex items-center justify-center w-full">
+            {{-- <div class="flex items-center justify-center w-full">
               <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-[#0d0f0d] border-dashed rounded-lg cursor-pointer">
                 <div class="flex flex-col items-center justify-center py-2">
                 
@@ -152,7 +152,10 @@
                 </div>
                 <input id="dropzone-file" type="file" class="hidden" name="payment_slip[]" onchange="handleFileSelected" multiple />
               </label>
-            </div> 
+            </div>  --}}
+            
+            <input name="payment_slip[]" multiple class="p-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " id="dropzone-file" type="file">
+
             @error('payment_slip')
               <p class="text-red-600 text-xs whitespace-nowrap">{{$message}}</p>
             @enderror  
