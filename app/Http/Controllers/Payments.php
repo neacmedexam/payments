@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PaymentPostRequest;
 use App\Models\Payments as ModelsPayments;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
@@ -35,11 +36,13 @@ class Payments extends Controller
 
                     $paymentSlipFiles = $request->file('payment_slip');
                     $paymentSlipPaths = [];
-
                     foreach ($paymentSlipFiles as $paymentSlipFile) {
                         $paymentSlipPath = $paymentSlipFile->store('upload', 'public');
+                        
+                        // dd(Storage::disk('public')->exists($paymentSlipPath));
                         $paymentSlipPaths[] = $paymentSlipPath;
                     }
+
                     $payments = ModelsPayments::create(array_merge($request->validated(),[
                         'payment_slip' => implode(',',$paymentSlipPaths),
                         'reference' => $string,
@@ -50,7 +53,7 @@ class Payments extends Controller
                     return redirect()->back()->with('success', 'Payment Succcessfully'); 
                 }
                 else{
-                    dd('no file attached');
+                    dd('There'/'s an error when uploading the files. Please try again.');
                 }
          
                 
@@ -91,7 +94,6 @@ class Payments extends Controller
 
         $user = ModelsPayments::find($id);
 
-        // dd($request->all(),$user->name);
         $user->update([
             'date_verified' => $request->input('date_verified'),
             'amount_deposited_php' => $request->input('amount_deposited_php'),

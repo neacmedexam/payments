@@ -205,7 +205,7 @@
                             </div>
                             <div class="pt-2 pr-2 flex justify-end  ">
                     
-                                <input class="text-xs uppercase tracking-wide font-bold p-2 px-4 border bg-[#016e0e] hover:bg-green-700  text-white rounded" type="submit" name="paymentprocess" value="Update" style="cursor:pointer;">
+                                <button class="text-xs uppercase tracking-wide font-bold p-2 px-4 border bg-[#016e0e] hover:bg-green-700  text-white rounded" type="submit" style="cursor:pointer;">Update</button>
                                 <a href="/payment/view" class="text-xs uppercase tracking-wide font-bold p-2 px-4 border bg-red-700 hover:bg-red-800  text-white rounded"   style="cursor:pointer;">Back</a>
                             
                             </div>

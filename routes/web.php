@@ -22,7 +22,7 @@ Route::group(['middleware' => ['guest']], function() {
     Route::get('login',[Accounts::class, 'login'])->name('login');
     Route::post('login/auth',[Accounts::class,'auth'])->name('login.auth');
     
-    Route::get('/payment/add', [Payments::class,'create']);
+    Route::get('/', [Payments::class,'create']);
 
     // Route::post('/payments/store','PaymentsController@store')->name('payments.store');
     Route::post('paymentprocess',[Payments::class,'store'])->name('payments.store');

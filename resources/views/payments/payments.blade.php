@@ -1,19 +1,28 @@
 @include('components.header')
-<body class=" m-0 p-0 h-screen w-screen bg-[#f9faf9] uppercase flex flex-col justify-center items-center text-[#0d0f0d] ">
+<body class=" m-0 p-0 h-screen w-screen bg-[#fcfcfc]  flex flex-col justify-center items-center text-[#0d0f0d] ">
   <div class=" lg:p-10 h-full w-full lg:max-w-[65%]  ">
-    <div class="w-full p-6 flex flex-col md:flex-row justify-center    text-[#0d0f0d] rounded-lg">
-      <div class="p-4 w-full h-full">
-        <div class="">
-          <p class="font-bold tracking-wider text-5xl sm:text-7xl  text-[#0d0f0d]">NEAC Payments</p>
+    <div class="w-full p-6 flex flex-col md:flex-row justify-end text-[#0d0f0d] rounded-lg">
+      <div class="sm:px-8 py-4 w-full h-full flex flex-col justify-evenly items-center">
+        <div class="pb-4">
+          <p class="font-bold tracking-wider text-6xl sm:text-7xl  text-[#0d0f0d] uppercase">NEAC Payments</p>
         </div>
-        <div class="">
-          <p class="pt-2 text-justify text-[10px] sm:text-xs">
-            <span class="font-bold">IMPORTANT NOTE:</span> 
-            <span class="">If you have any complaints or concerns, please report to <a href="mailto:feedback@applynclex.com" class="text-blue-600 font-bold">feedback@applynclex.com</a> or call our office at <strong>+63 (02) 3485-0853.</strong> Please do not transact with any NEAC officer or person outside NEAC offices. Do not deposit your fees to a bank account other than NEAC bank accounts, which have <strong>'NEAC MEDICAL EXAMS APPLICATION CENTER, INC.'</strong> as the bank account name. NEAC has no control on changes in certain states’ application fees and requirements. If any state changes its requirements or/and fees during the processing of applications, these changes may affect your applications in the pipeline, and switching to another state may be needed and applicable additional fees apply.</span>
+        <div class="flex flex-col justify-evenly sm:text-justify">
+          <p class="py-2 text-justify font-bold text-xl">
+            IMPORTANT NOTE:
+          </p>
+          <p class="py-2">
+            <span class="">If you have any complaints or concerns, please report to <a href="mailto:feedback@applynclex.com" class="text-blue-600 font-bold">feedback@applynclex.com</a> or call our office at <strong>+63 (02) 3485-0853.</strong> 
+       
+          </p>
+          <p class="py-2">
+            Please do not transact with any NEAC officer or person outside NEAC offices. Do not deposit your fees to a bank account other than NEAC bank accounts, which have <strong>'NEAC MEDICAL EXAMS APPLICATION CENTER, INC.'</strong> as the bank account name. NEAC has no control on changes in certain states’ application fees and requirements. 
+          </p>
+          <p class="py-2">
+            If any state changes its requirements or/and fees during the processing of applications, these changes may affect your applications in the pipeline, and switching to another state may be needed and applicable additional fees apply.
           </p>
         </div>
       </div>
-      <div class="p-8 sm:px-10 w-full bg-[#96bf91] shadow-xl border=[#96bf91] rounded-2xl text-[#0d0f0d]">
+      <div class="p-8 sm:px-10 w-full bg-[#f0f0f0] shadow-xl border=[#96bf91] rounded-2xl text-[#0d0f0d] uppercase">
         <form method="POST" action="{{route('payments.store')}}" enctype="multipart/form-data"  >
           @csrf
           
@@ -160,7 +169,7 @@
               <p class="text-red-600 text-xs whitespace-nowrap">{{$message}}</p>
             @enderror  
           </div>
-          <div class="py-2 flex flex-col justify-center items-center w-full">
+          <div class="py-2 flex flex-col items-center w-full">
             
             {!! NoCaptcha::renderJs() !!}
             {!! NoCaptcha::display() !!}
@@ -172,7 +181,7 @@
               
             @endif
           </div>
-          <div class="pt-2 flex justify-end ">
+          <div class=" flex justify-end ">
             {{-- <button class="p-2 px-4 border bg-green-600 border-green-600 text-white rounded">Submit</button> --}}      
             {{-- {!! RecaptchaV3::field('paymentprocess') !!}
     
@@ -180,8 +189,10 @@
               <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
             @enderror --}}
     
-            <input class="text-xs tracking-wide font-bold p-2 px-4 border bg-[#016e0e] border-[#016e0e] text-white rounded" type="submit" name="paymentprocess" value="SUBMIT" style="cursor:pointer;">
-          </div>
+            <button class="text-md w-full tracking-widest font-medium p-4 border bg-[#016e0e] border-[#016e0e] hover:bg-[#016e0eea] transition-all duration-300 text-white rounded" type="submit">
+              SUBMIT PAYMENT
+            </button>
+            </div>
           </form>
       </div>
       
