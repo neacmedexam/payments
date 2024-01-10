@@ -1,7 +1,26 @@
 @include('components.header')
-<body class=" m-0 p-0 h-screen w-screen bg-[#fcfcfc]  flex flex-col justify-center items-center text-[#0d0f0d] ">
+<body class=" m-0 p-0 h-screen w-screen bg-[url('/image/bg.png')]  flex flex-col justify-center items-center text-[#0d0f0d] ">
+  @if(session()->has('success'))
+  <div id="alert" class="absolute h-screen w-screen bg-black/70">
+    <div class="flex justify-center items-center w-full h-full">
+      <div class="p-4 px-8 uppercase text-4xl text-center h-[25%] align-middle bg-white/90 rounded-xl flex flex-col justify-center items-center ">
+        <p class="">Forms Submitted.</p>
+        <p>Thank you!</p>
+      </div>
+    </div>
+  </div>
+  @elseif(session()->has('failed'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <span class="block sm:inline">{{ session()->get('failed') }}</span>
+      <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+      </span>
+    </div>
+  @endif  
+
+
   <div class=" lg:p-10 h-full w-full lg:max-w-[65%]  ">
-    <div class="w-full p-6 flex flex-col md:flex-row justify-end text-[#0d0f0d] rounded-lg">
+    <div class="w-full bg-[#fafafa] p-6 flex flex-col md:flex-row justify-end text-[#0d0f0d] rounded-lg shadow-lg">
       <div class="sm:px-8 py-4 w-full h-full flex flex-col justify-evenly items-center">
         <div class="pb-4">
           <p class="font-bold tracking-wider text-6xl sm:text-7xl  text-[#0d0f0d] uppercase">NEAC Payments</p>
@@ -22,11 +41,11 @@
           </p>
         </div>
       </div>
-      <div class="p-8 sm:px-10 w-full bg-[#f0f0f0] shadow-xl border=[#96bf91] rounded-2xl text-[#0d0f0d] uppercase">
+      <div class="p-8 sm:px-10 w-full  text-[#0d0f0d] uppercase border-l-2 ">
         <form method="POST" action="{{route('payments.store')}}" enctype="multipart/form-data"  >
           @csrf
           
-          @if(session()->has('success'))
+          {{-- @if(session()->has('success'))
             <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
               <!--<strong class="font-bold">Holy smokes!</strong>-->
               <span class="block sm:inline">{{ session()->get('success') }}</span>
@@ -41,7 +60,7 @@
                 <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
               </span>
             </div>
-          @endif  
+          @endif   --}}
           <div class="pb-4">
             <p class=" font-bold tracking-wide text-xl sm:text-2xl  text-[#101310]  text-center">KINDLY SUBMIT YOUR PAYMENT HERE</p>
           </div>
@@ -103,7 +122,7 @@
             <label class="block uppercase tracking-wide text-[#0d0f0d] text-sm font-bold mb-2" for="mode_of_payment">
               Mode of Payment<span class="text-xs text-red-600">*</span>
             </label>
-            <div class="relative pr-2">
+            <div class=" pr-2">
               <select name="mode_of_payment" onChange="check(this);" class="text-sm block shadow-lg w-full bg-gray-100 border border-gray-200 text-[#0d0f0d] py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="mySelect">
                 <option value="BDO" selected {{old('mode_of_payment') == 'BDO' ? 'selected' : ''}}>BDO</option>
                 <option value="Debit Card/Credit Card" {{old('mode_of_payment') == 'Debit Card/Credit Card' ? 'selected' : ''}}>Debit Card/Credit Card</option>
@@ -189,7 +208,7 @@
               <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
             @enderror --}}
     
-            <button class="text-md w-full tracking-widest font-medium p-4 border bg-[#016e0e] border-[#016e0e] hover:bg-[#016e0eea] transition-all duration-300 text-white rounded" type="submit">
+            <button class="text-md w-full tracking-widest font-medium p-4 border bg-[#01599D] border-[#01599D] hover:bg-[#01599dc0] transition-all duration-300 text-white rounded" type="submit">
               SUBMIT PAYMENT
             </button>
             </div>
@@ -213,24 +232,31 @@
 
         document.getElementById('dropzone-file').addEventListener('change', handleFileSelected);
 
-function handleFileSelected(event) {
-  const fileNames = [];
-    for (let i = 0; i < event.target.files.length; i++) {
-        fileNames.push(event.target.files[i].name);
-    }
-    // Display the file names
-  // console.log(fileName);
-  const name1 = document.querySelector('.upload1');
-  const name2 = document.querySelector('.upload2');
-  if(fileNames != ''){
-    name1.textContent = '';
-    name2.textContent = '';
-    
-    document.querySelector('.file-name-placeholder').textContent = fileNames.join(', ');
-  }
+        function handleFileSelected(event) {
+          const fileNames = [];
+            for (let i = 0; i < event.target.files.length; i++) {
+                fileNames.push(event.target.files[i].name);
+            }
+            // Display the file names
+          // console.log(fileName);
+          const name1 = document.querySelector('.upload1');
+          const name2 = document.querySelector('.upload2');
+          if(fileNames != ''){
+            name1.textContent = '';
+            name2.textContent = '';
+            
+            document.querySelector('.file-name-placeholder').textContent = fileNames.join(', ');
+          }
 
-  // document.querySelector('.file-name-placeholder').textContent = fileName;
-}
+          // document.querySelector('.file-name-placeholder').textContent = fileName;
+        }
+
+        setTimeout(() => {
+          const box = document.getElementById('alert');
+
+          box.style.display = 'none';
+
+        }, 2500); // 👈️ time in milliseconds
 
     </script>
 </body>
