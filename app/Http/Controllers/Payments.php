@@ -35,8 +35,10 @@ class Payments extends Controller
                 if($request->hasFile('payment_slip')){
 
                     $paymentSlipFiles = $request->file('payment_slip');
+
                     $paymentSlipPaths = [];
                     foreach ($paymentSlipFiles as $paymentSlipFile) {
+                        dd($paymentSlipFile->extension());
                         $paymentSlipPath = $paymentSlipFile->store('upload', 'public');
                         
                         // dd(Storage::disk('public')->exists($paymentSlipPath));

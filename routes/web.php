@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounts;
 use App\Http\Controllers\Payments;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,13 @@ Route::group(['middleware' => ['guest']], function() {
     Route::post('login/auth',[Accounts::class,'auth'])->name('login.auth');
     
     Route::get('/', [Payments::class,'create']);
-
+    
+    Route::get('/clear',function(){
+        Artisan::call('optimize:clear'); 
+        
+        return 'clear';
+     });
+     
     // Route::post('/payments/store','PaymentsController@store')->name('payments.store');
     Route::post('paymentprocess',[Payments::class,'store'])->name('payments.store');
 });

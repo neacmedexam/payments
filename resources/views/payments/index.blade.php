@@ -1,10 +1,6 @@
 @include('components.header')
 <body class=" m-0 p-0 h-screen  bg-[#ececec] uppercase flex flex-col  items-center text-[#0d0f0d] ">
-    <div class=" w-full px-16 py-2 bg-green-600/70 flex justify-end text-[#f9faf9]">
-        <a href="/logout" class="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Sign Out
-        </a>
-    </div>
+    @include('components.nav')
     
     <div class=" lg:p-10 h-full w-full">
         
@@ -68,7 +64,7 @@
                                         @endif
                                     </td>
                                     <td class="py-3 px-4 text-center">
-                                        <input type="checkbox" name="" id="" {{$item->payment_verified == 1 ? 'checked' : ''}} >
+                                        <input type="checkbox" name="" id="" disabled {{$item->payment_verified == 1 ? 'checked' : ''}} >
                                     </td>
                                     <td class="py-3 px-4 font-medium">{{$item->verified_by}}</td>
                                     <td class="py-3 px-4">

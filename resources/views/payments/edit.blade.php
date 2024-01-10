@@ -1,10 +1,6 @@
 @include('components.header')
 <body class=" m-0 p-0 h-screen  bg-[#ececec] uppercase flex flex-col  items-center text-[#0d0f0d] ">
-    <div class=" w-full px-16 py-2 bg-green-600/70 flex justify-end text-[#f9faf9]">
-        <a href="/logout" class="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Sign Out
-        </a>
-    </div>
+    @include('components.nav')
     
     <div class=" lg:p-10 h-full w-full">
         
@@ -13,9 +9,10 @@
          
 
                 <div class="w-1 bg-blue-600 "></div>
-                <div class="">
+                <div class="align-middle w-full">
 
-                    <p class="text-4xl pl-2 align-middle w-full h-full">View Payment - {{$record->id}}</p>
+                    <p class="text-4xl pl-2 align-middle w-full h-full">View Payment</p>
+                  
                 </div>
             </div>
             @if(session()->has('success'))
@@ -205,7 +202,7 @@
                             </div>
                             <div class="pt-2 pr-2 flex justify-end  ">
                     
-                                <button class="text-xs uppercase tracking-wide font-bold p-2 px-4 border bg-[#016e0e] hover:bg-green-700  text-white rounded" type="submit" style="cursor:pointer;">Update</button>
+                                <button class="text-xs uppercase tracking-wide font-bold p-2 px-4 border bg-[#01599D] hover:bg-[#0a5085]  text-white rounded" type="submit" style="cursor:pointer;">Update</button>
                                 <a href="/payment/view" class="text-xs uppercase tracking-wide font-bold p-2 px-4 border bg-red-700 hover:bg-red-800  text-white rounded"   style="cursor:pointer;">Back</a>
                             
                             </div>

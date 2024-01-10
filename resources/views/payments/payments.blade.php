@@ -1,5 +1,5 @@
 @include('components.header')
-<body class=" m-0 p-0 h-screen w-screen bg-[url('/image/bg.png')]  flex flex-col justify-center items-center text-[#0d0f0d] ">
+<body class=" m-0 p-0 h-screen w-screen bg-[url('/image/bg.png')] bg-center bg-no-repeat flex flex-col justify-center items-center text-[#0d0f0d] ">
   @if(session()->has('success'))
   <div id="alert" class="absolute h-screen w-screen bg-black/70">
     <div class="flex justify-center items-center w-full h-full">
@@ -20,13 +20,13 @@
 
 
   <div class=" lg:p-10 h-full w-full lg:max-w-[65%]  ">
-    <div class="w-full bg-[#fafafa] p-6 flex flex-col md:flex-row justify-end text-[#0d0f0d] rounded-lg shadow-lg">
+    <div class="w-full bg-[#f8f8f8]/95 p-6 flex flex-col md:flex-row justify-end text-[#0d0f0d] rounded-lg shadow-2xl">
       <div class="sm:px-8 py-4 w-full h-full flex flex-col justify-evenly items-center">
         <div class="pb-4">
           <p class="font-bold tracking-wider text-6xl sm:text-7xl  text-[#0d0f0d] uppercase">NEAC Payments</p>
         </div>
         <div class="flex flex-col justify-evenly sm:text-justify">
-          <p class="py-2 text-justify font-bold text-xl">
+          <p class="py-2 text-justify font-bold text-2xl">
             IMPORTANT NOTE:
           </p>
           <p class="py-2">
@@ -41,26 +41,11 @@
           </p>
         </div>
       </div>
-      <div class="p-8 sm:px-10 w-full  text-[#0d0f0d] uppercase border-l-2 ">
+      <div class="px-8 py-4 sm:px-10 w-full  text-[#0d0f0d] uppercase border-l-2 ">
         <form method="POST" action="{{route('payments.store')}}" enctype="multipart/form-data"  >
           @csrf
           
-          {{-- @if(session()->has('success'))
-            <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-              <!--<strong class="font-bold">Holy smokes!</strong>-->
-              <span class="block sm:inline">{{ session()->get('success') }}</span>
-              <span class="absolute top-0 bottom-0 right-0 px-4 py-3" onclick="closeAlert()">
-                <svg onclick="closeAlert()" class="fill-current h-6 w-6 text-black/60" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-              </span>
-            </div>
-          @elseif(session()->has('failed'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-              <span class="block sm:inline">{{ session()->get('failed') }}</span>
-              <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-              </span>
-            </div>
-          @endif   --}}
+     
           <div class="pb-4">
             <p class=" font-bold tracking-wide text-xl sm:text-2xl  text-[#101310]  text-center">KINDLY SUBMIT YOUR PAYMENT HERE</p>
           </div>
@@ -152,36 +137,11 @@
               @enderror
             </div>
           </div>
-          {{-- <div class="text-sm pr-2">
-                
-            <label class="block text-[#0d0f0d] text-sm font-bold" for="file_input">Upload the Payment Slip<span class="text-xs text-red-600">*</span>
-    
-            </label>
-            <input name="payment_slip" class="py-2 px-3 block w-full text-sm text-[#0d0f0d] border shadow-lg border-gray-300 rounded cursor-pointer bg-gray-50 "  aria-describedby="file_input_help" id="file_input" type="file">
-            <p class="block text-[#0d0f0d] text-[10px] font-bold mb-2" id="file_input_help">PNG, JPG, JPEG, HEIC, or PDF</p>
-            @error('payment_slip')
-              <p class="text-red-600 text-xs whitespace-nowrap">{{$message}}</p>
-            @enderror   
-          </div> --}}
+ 
           <div class="text-sm pr-2">
             <label class="block text-sm text-[#0d0f0d] font-bold" for="payment_slip">
             Payment Slip
             </label>
-            {{-- <div class="flex items-center justify-center w-full">
-              <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-[#0d0f0d] border-dashed rounded-lg cursor-pointer">
-                <div class="flex flex-col items-center justify-center py-2">
-                
-                    <svg class="mx-auto h-8 w-8 text-[#0d0f0d]" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <p class="upload1 text-xs text-[#0d0f0d] dark:text-[#0d0f0d]"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                    <p class="upload2 text-xs text-[#0d0f0d] dark:text-[#0d0f0d]">JPEG, PNG, JPG or HEIC</p>
-                    <div class="file-name-placeholder font-medium"></div>
-                </div>
-                <input id="dropzone-file" type="file" class="hidden" name="payment_slip[]" onchange="handleFileSelected" multiple />
-              </label>
-            </div>  --}}
-            
             <input name="payment_slip[]" multiple class="p-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none " id="dropzone-file" type="file">
 
             @error('payment_slip')
@@ -201,13 +161,7 @@
             @endif
           </div>
           <div class=" flex justify-end ">
-            {{-- <button class="p-2 px-4 border bg-green-600 border-green-600 text-white rounded">Submit</button> --}}      
-            {{-- {!! RecaptchaV3::field('paymentprocess') !!}
-    
-            @error('paymentprocess')
-              <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-            @enderror --}}
-    
+
             <button class="text-md w-full tracking-widest font-medium p-4 border bg-[#01599D] border-[#01599D] hover:bg-[#01599dc0] transition-all duration-300 text-white rounded" type="submit">
               SUBMIT PAYMENT
             </button>
