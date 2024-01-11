@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Accounts;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Payments;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -53,4 +54,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('accounts',[Accounts::class,'index'])->name('accounts.index');
     Route::get('accounts/add',[Accounts::class,'create'])->name('accounts.create');
     Route::post('accounts/store',[Accounts::class,'store'])->name('accounts.store');
+
+
+    //dashboard
+    Route::get('dashboard',[Dashboard::class,'home'])->name('dashboard.home');
 });

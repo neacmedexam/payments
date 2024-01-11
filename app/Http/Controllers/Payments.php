@@ -29,7 +29,14 @@ class Payments extends Controller
         $string = str_shuffle($pin);
 
         $checkIfExist = ModelsPayments::where('reference', '==',$string)->get();
-     
+        $allowedExtensions = [
+            'jpg',
+            'jpeg',
+            'png',
+            'heic',
+            'pdf',
+        ];
+        
         try{
             if($checkIfExist->count() == 0){
                 if($request->hasFile('payment_slip')){
@@ -38,24 +45,33 @@ class Payments extends Controller
 
                     $paymentSlipPaths = [];
                     foreach ($paymentSlipFiles as $paymentSlipFile) {
-                        dd($paymentSlipFile->extension());
-                        $paymentSlipPath = $paymentSlipFile->store('upload', 'public');
-                        
-                        // dd(Storage::disk('public')->exists($paymentSlipPath));
-                        $paymentSlipPaths[] = $paymentSlipPath;
-                    }
 
-                    $payments = ModelsPayments::create(array_merge($request->validated(),[
-                        'payment_slip' => implode(',',$paymentSlipPaths),
-                        'reference' => $string,
-                        'date_created' => Carbon::now(),
-                        'created_by' => $request->ip(),
-                    ]));
+                        $extension = $paymentSlipFile->extension();
+
+                        if(in_array($extension,$allowedExtensions)){
+                            $paymentSlipPath = $paymentSlipFile->store('upload', 'public');
+                            $paymentSlipPaths[] = $paymentSlipPath;
+                        }
+                        
+                    }
+                    if($paymentSlipPaths){
+                        $payments = ModelsPayments::create(array_merge($request->validated(),[
+                            'payment_slip' => implode(',',$paymentSlipPaths),
+                            'reference' => $string,
+                            'date_created' => Carbon::now(),
+                            'created_by' => $request->ip(),
+                        ]));
+                    }
+                    else{
+                        return redirect()->back()->with('error', 'File upload failed. Please try again.'); 
+                    }
+                 
 
                     return redirect()->back()->with('success', 'Payment Succcessfully'); 
                 }
                 else{
-                    dd('There'/'s an error when uploading the files. Please try again.');
+                    
+                    return redirect()->back()->with('error', 'An error occured when uploading the files. Please try again.'); 
                 }
          
                 

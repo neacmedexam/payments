@@ -1,14 +1,46 @@
 @include('components.header')
+
 <body class=" m-0 p-0 h-screen  bg-[#ececec] uppercase flex flex-col  items-center text-[#0d0f0d] ">
     @include('components.nav')
     
     <div class=" lg:p-10 h-full w-full">
         
-        <div class="w-full p-6  text-[#0d0f0d] rounded-lg ">
+        <div class="w-full p-6 sm:px-6 sm:py-0  text-[#0d0f0d] rounded-lg ">
+            
+
+            <nav class="flex pb-2" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <p class="inline-flex items-center text-sm font-medium text-gray-900  ">
+                    <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+                    </svg>
+                    Home
+                    </p>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-900 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                    <p class="ms-1 text-sm font-medium text-gray-900  md:ms-2 ">Payments</p>
+                    </div>
+                </li>
+                {{-- <li aria-current="page">
+                    <div class="flex items-center">
+                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Records</span>
+                    </div>
+                </li> --}}
+                </ol>
+            </nav>
+  
             <div class="pb-4 flex flex-row ">
          
 
-                <div class="w-1 bg-green-600 block"></div>
+                <div class="w-1 bg-[#01599D] block"></div>
             
                 <p class="text-4xl pl-2 align-middle w-full h-full">Payment Record</p>
             </div>
@@ -59,22 +91,22 @@
                                                     $files = str_replace("/uploads","",$file);
                                                     $shortenfilename = str_replace("upload/","",$files);
                                                 @endphp
-                                                <a href="{{$path.'/'.$files}}" class="font-medium text-blue-600 hover:text-blue-800" target="_blank" rel="noopener">{{$shortenfilename}}</a>
+                                                <a href="{{$path.'/'.$files}}" class="font-medium text-[#01599D] hover:text-blue-800" target="_blank" rel="noopener">{{$shortenfilename}}</a>
                                             @endforeach
                                         @endif
                                     </td>
                                     <td class="py-3 px-4 text-center">
-                                        <input type="checkbox" name="" id="" disabled {{$item->payment_verified == 1 ? 'checked' : ''}} >
+                                        <input type="checkbox" name="" id="" {{$item->payment_verified == 1 ? 'checked' : ''}} class="{{$item->payment_verified == 1 ? 'accent-[#01599D]' : ''}}" >
                                     </td>
                                     <td class="py-3 px-4 font-medium">{{$item->verified_by}}</td>
                                     <td class="py-3 px-4">
-                                        <a href="{{ route('payments.edit',$item->id) }}" class="font-medium text-blue-600 hover:text-blue-800">Edit</a>
+                                        <a href="{{ route('payments.edit',$item->id) }}" class="font-medium text-[#01599D] hover:text-blue-800">Edit</a>
                                     </td>
                                 </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td  colspan="10" class="text-center p-4 font-bold text-xs">No record found.</td>
+                                    <td  colspan="99" class="text-center p-4 font-bold text-xs">No record found.</td>
                                 </tr>
                             @endif
 
