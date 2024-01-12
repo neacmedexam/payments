@@ -29,24 +29,80 @@
             
                 <p class="text-4xl pl-2 align-middle w-full h-full">Payment Dashboard</p>
             </div>
-            <div class="w-full h-full bg-slate-200 flex flex-col justify-center items-center p-4">
+            <div class="w-full h-full  flex flex-col justify-center items-center py-4 px-2">
                 <div class="flex flex-row justify-center items-center w-full h-full">
-                    <div class="w-full bg-red-600 p-4 m-2 h-full">
-                        <p>Total Payments</p>
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                        <p class="text-2xl">Total Payments</p>
+                        <p class="text-7xl font-medium">{{$payments}}</p>
                     </div>
-                    <div class="w-full bg-blue-600 p-4 m-2 h-full">
-                        <p>Total Verified Payments</p>
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                        <p class="text-2xl">Total Verified Payments</p>
+                        <p class="text-7xl font-medium">{{$verified}}</p>
                     </div>
-                    <div class="w-full bg-green-600 p-4 m-2 h-full">
-                        <p>Total Amount Deposited PHP</p>
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                        <p class="text-2xl">Total Amount Deposited PHP</p>
+                        <p class="text-7xl font-medium">₱<span>{{$php}}</span></p>
                     </div>
-                    <div class="w-full bg-amber-600 p-4 m-2 h-full">
-                        <p>Total Amount Deposited USD</p>
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                        <p class="text-2xl">Total Amount Deposited USD</p>
+                        <p class="text-7xl font-medium">$<span>{{$usd}}</span></p>
                     </div>
                 </div>
-                <div class="h-full">
-                    <div class="m-2">
-                        <p>Chart here</p>
+                <div class="w-full h-full flex   ">
+                    <div class="h-full w-3/4  bg-[#ffffff] rounded-md p-4 m-2 shadow-2xl flex justify-center items-center">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <div class="h-full w-1/4 m-2  flex flex-col">
+                        <div class="mb-2 p-4  bg-[#ffffff] rounded-md shadow-2xl">
+                            <p class="text-2xl pb-2">Employees</p>
+                            <table class="table-fixed border">
+                                <thead>
+                                <tr class="border-b border-black/80"> 
+                                     <th class="text-left">Name</th>
+                                    <th class="text-left">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                                    <td>Malcolm Lockyer</td>
+                                </tr>
+                                <tr>
+                                    <td>Witchy Woman</td>
+                                    <td>The Eagles</td>
+                                </tr>
+                                <tr>
+                                    <td>Shining Star</td>
+                                    <td>Earth, Wind, and Fire</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bg-[#ffffff] p-4  rounded-md shadow-2xl">
+                            <p class="text-2xl pb-2">Mode of Payments</p>
+                            <table class="table-fixed border">
+                                <thead>
+                                <tr class="border-b border-black/80"> 
+                                    <th class="text-left">Name</th>
+                                    <th class="text-left">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                                    <td>Malcolm Lockyer</td>
+                                </tr>
+                                <tr>
+                                    <td>Witchy Woman</td>
+                                    <td>The Eagles</td>
+                                </tr>
+                                <tr>
+                                    <td>Shining Star</td>
+                                    <td>Earth, Wind, and Fire</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,5 +110,20 @@
          
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const data = @json($data);
+        const options = @json($options);
+
+        const chart = new Chart(document.getElementById('myChart'), {
+            type: 'bar',
+            data: data,
+            options: options,
+        });
+
+
+
+    </script>
 </body>
 </html>

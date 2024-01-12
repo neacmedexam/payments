@@ -61,7 +61,7 @@
                             <th class="py-3 px-4 text-left">Payment Slip</th>
                             <th class="py-3 px-4 text-left">Verified</th>
                             <th class="py-3 px-4 text-left">Verified By</th>
-                            <th class="py-3 px-4 text-left">Action</th>
+                            <th class="py-3 px-4">Action</th>
                         </tr>
                         </thead>
                         <tbody class="text-blue-gray-900">
@@ -84,7 +84,7 @@
                                     <td class="py-3 px-4">{{$item->mode_of_payment}}</td>
                                     <td class="py-3 px-4">{{$item->other_mop}}</td>
                                     <td class="py-3 px-4">{{$item->total_amount_paid}}</td>
-                                    <td class="py-3 px-4 whitespace-pre-line">
+                                    <td class="py-3 px-4">
                                         @if($checkfiles)
                                             @foreach($checkfiles as $file)
                                                 @php
@@ -99,8 +99,13 @@
                                         <input type="checkbox" name="" id="" {{$item->payment_verified == 1 ? 'checked' : ''}} class="{{$item->payment_verified == 1 ? 'accent-[#01599D]' : ''}}" >
                                     </td>
                                     <td class="py-3 px-4 font-medium">{{$item->verified_by}}</td>
-                                    <td class="py-3 px-4">
-                                        <a href="{{ route('payments.edit',$item->id) }}" class="font-medium text-[#01599D] hover:text-blue-800">Edit</a>
+                                    <td class="py-3 px-4 w-full">
+                                        <a href="{{ route('payments.edit',$item->id) }}" class="font-medium text-[#01599D] hover:text-blue-800 flex justify-center items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                              </svg>
+                                              
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
