@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\PaymentPostRequest;
 use App\Models\Payments as ModelsPayments;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
@@ -87,9 +88,12 @@ class Payments extends Controller
 
     }
 
-    public function view(){
+    public function view(Request $request){
         $getAll = ModelsPayments::select('*')->orderBy('id','desc')->simplePaginate(10);
         
+
+
+      
 
         return view('payments.index',[
             'record' => $getAll,

@@ -44,9 +44,9 @@
             
                 <p class="text-4xl pl-2 align-middle w-full h-full">Payment Record</p>
             </div>
-            <div class="flex min-h-full  justify-center ">
-                <div class="overflow-x-auto shadow-lg">
-                    <table class=" bg-white shadow-md rounded-xl text-sm">
+            <div class="flex h-full  justify-center ">
+                <div class="overflow-x-auto py-4 h-full">
+                    <table id="payments_table" class="display user_datatable bg-white shadow-md rounded-xl text-sm">
                         <thead>
                         <tr class="bg-blue-gray-100 text-gray-700 text-xs">
                     
@@ -126,6 +126,8 @@
                 {{ $record->appends(request()->all())->links() }}
             </div>
         </div>
+      
     </div>
 </body>
+
 </html>

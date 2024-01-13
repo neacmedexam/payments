@@ -8,7 +8,7 @@
         <div class="w-full p-6 sm:px-6 sm:py-0  text-[#0d0f0d] rounded-lg ">
             
 
-            <nav class="flex pb-2" aria-label="Breadcrumb">
+            <nav class="flex pb-2 pl-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
                     <p class="inline-flex items-center text-sm font-medium text-gray-900  ">
@@ -24,84 +24,95 @@
   
             <div class="pb-4 flex flex-row ">
          
+                <div class="w-full ">
+                    <div class="w-1 bg-[#01599D] block"></div>
+                
+                    <p class="text-4xl pl-2 align-middle w-full h-full">Payment Dashboard</p>
 
-                <div class="w-1 bg-[#01599D] block"></div>
-            
-                <p class="text-4xl pl-2 align-middle w-full h-full">Payment Dashboard</p>
+                </div>
+                
             </div>
             <div class="w-full h-full  flex flex-col justify-center items-center py-4 px-2">
-                <div class="flex flex-row justify-center items-center w-full h-full">
-                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                <div class="flex justify-end w-full px-2 ">
+                    <select name="mode_of_payment" onChange="check(this);" class="text-sm block shadow-lg bg-[#ffffff] border border-gray-200 text-[#0d0f0d] py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white " id="mySelect">
+                        <option value="2024" selected {{old('mode_of_payment') == '2024' ? 'selected' : ''}}>2024</option>
+                      </select>
+                </div>
+                <div class="flex flex-row justify-center items-center w-full h-full p-2">
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 mx-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
                         <p class="text-2xl">Total Payments</p>
-                        <p class="text-7xl font-medium">{{$payments}}</p>
+                        <p class="text-6xl font-medium text-center">{{$payments}}</p>
                     </div>
-                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 mx-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
                         <p class="text-2xl">Total Verified Payments</p>
-                        <p class="text-7xl font-medium">{{$verified}}</p>
+                        <p class="text-6xl font-medium text-center">{{$verified}}</p>
                     </div>
-                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 mx-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
                         <p class="text-2xl">Total Amount Deposited PHP</p>
-                        <p class="text-7xl font-medium">₱<span>{{$php}}</span></p>
+                        <p class="text-6xl font-medium text-center">₱<span>{{$php}}</span></p>
                     </div>
-                    <div class="w-full bg-[#ffffff] rounded-md p-4 m-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                    <div class="w-full bg-[#ffffff] rounded-md p-4 mx-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
                         <p class="text-2xl">Total Amount Deposited USD</p>
-                        <p class="text-7xl font-medium">$<span>{{$usd}}</span></p>
+                        <p class="text-6xl font-medium text-center">$<span>{{$usd}}</span></p>
                     </div>
                 </div>
-                <div class="w-full h-full flex   ">
-                    <div class="h-full w-3/4  bg-[#ffffff] rounded-md p-4 m-2 shadow-2xl flex justify-center items-center">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                    <div class="h-full w-1/4 m-2  flex flex-col">
-                        <div class="mb-2 p-4  bg-[#ffffff] rounded-md shadow-2xl">
-                            <p class="text-2xl pb-2">Employees</p>
-                            <table class="table-fixed border">
-                                <thead>
-                                <tr class="border-b border-black/80"> 
-                                     <th class="text-left">Name</th>
-                                    <th class="text-left">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                                    <td>Malcolm Lockyer</td>
-                                </tr>
-                                <tr>
-                                    <td>Witchy Woman</td>
-                                    <td>The Eagles</td>
-                                </tr>
-                                <tr>
-                                    <td>Shining Star</td>
-                                    <td>Earth, Wind, and Fire</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                <div class="w-full h-full flex flex-col justify-center sm:flex-row px-2">
+                    <div class=" mx-2 h-full  w-[75.5%] bg-[#ffffff] rounded-md shadow-2xl flex flex-col justify-center ">
+                        
+                        <div class="h-full w-full p-4">
+                            <canvas id="myChart"></canvas>
+
                         </div>
-                        <div class="bg-[#ffffff] p-4  rounded-md shadow-2xl">
-                            <p class="text-2xl pb-2">Mode of Payments</p>
-                            <table class="table-fixed border">
+                    </div>
+                    <div class=" mx-2 h-full  w-[24.5%] flex flex-col justify-evenly  ">
+                        <div class=" p-4  bg-[#ffffff] rounded-md shadow-2xl h-full">
+                         
+                            <p class="text-2xl pb-2">Employees</p>
+                            <table class="table-fixed border w-full p-2">
                                 <thead>
-                                <tr class="border-b border-black/80"> 
-                                    <th class="text-left">Name</th>
-                                    <th class="text-left">Total</th>
+                                <tr class="border-b border-black/80 p-2"> 
+                                    <th class="text-left p-2">Name</th>
+                                    <th class="text-center p-2">Total</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                                    <td>Malcolm Lockyer</td>
-                                </tr>
-                                <tr>
-                                    <td>Witchy Woman</td>
-                                    <td>The Eagles</td>
-                                </tr>
-                                <tr>
-                                    <td>Shining Star</td>
-                                    <td>Earth, Wind, and Fire</td>
-                                </tr>
+                                    @foreach ($employees as $list)
+                                        <tr class="p-2">
+                                            <td class="px-2">{{$list->verified_by}}</td>
+                                            <td class="text-center px-2">{{$list->count}}</td>
+                                        </tr>
+                                    @endforeach
+                        
                                 </tbody>
                             </table>
+                         
+                            
+                        </div>
+                        <div class="bg-[#ffffff] p-4  rounded-md shadow-2xl  my-2 h-full">
+                            <p class="text-2xl pb-2">Mode of Payments</p>
+                            <table class="table-auto border w-full h-full overflow-scroll ">
+                                <thead>
+                                <tr class="border-b border-black/80 p-2"> 
+                                    <th class="text-left p-2">Name</th>
+                                    <th class="text-center p-2">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($mode_of_payment as $mop)
+                                        <tr class="p-2">
+                                            <td class="p-2">{{$mop->mode_of_payment}}</td>
+                                            <td class="text-center p-2">{{$mop->count}}</td>
+                                        </tr>
+                                    @endforeach
+                        
+                                </tbody>
+                            </table>
+                           
+                        </div>
+                        <div class="bg-[#ffffff] p-4  rounded-md shadow-2xl h-full">
+                            <p class="text-2xl pb-2">Mode of Payments</p>
+                            
+                           
                         </div>
                     </div>
                 </div>
@@ -113,9 +124,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-      const data = @json($data);
+        const data = @json($data);
         const options = @json($options);
-
         const chart = new Chart(document.getElementById('myChart'), {
             type: 'bar',
             data: data,

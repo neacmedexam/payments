@@ -15,8 +15,9 @@ class Dashboard extends Controller
         $php = Payments::sum('amount_deposited_php');
         $usd = Payments::sum('amount_deposited_usd');
 
-
+        //chart
         $currentYear = date('Y');
+        
         $dataPoints = DB::table('tbl_payments')
         ->select(DB::raw('COUNT(*) as count'),DB::raw('COUNT(payment_verified) as verified'), DB::raw('DATE_FORMAT(date_created, "%Y-%m") as month'))
         ->whereYear('date_created', $currentYear)
@@ -36,19 +37,20 @@ class Dashboard extends Controller
             'labels' => $month,
             'datasets' => [
                 [
-                    'label' => 'Bar Dataset',
+                    'label' => 'Payments',
                     'type' => 'bar',
-                    'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
-                    'borderColor' => 'rgba(255, 99, 132, 1)',
+                    'backgroundColor' => 'rgba(1,89,157,0.8)',
+                    'borderColor' => 'rgba(1,89,157,0.8)',
                     'borderWidth' => 1,
                     'data' => $count,
                 ],
                 [
                     'type' => 'line',
-                    'label' => 'Line Dataset',
+                    'label' => 'Verified',
                     'data' => $countverified,
-                    'fill' => false,
-                    'borderColor' => 'rgba(54, 162, 235, 1)',
+                    'fill' => true,
+                    'backgroundColor' => 'rgba(1,60,106,0.7)',
+                    'borderColor' => 'rgb(1,60,106)',
                     'borderWidth' => 1
                 ]
             ],
@@ -74,13 +76,30 @@ class Dashboard extends Controller
                 ],
             ],
         ];
-    
+        //end chart
+
+        //employees
+        $employees = Payments::select('verified_by',DB::raw('count(verified_by) as count'))
+        ->whereNotNull('verified_by')
+        ->groupBy('verified_by')
+        ->orderBy(DB::raw('count(verified_by)'),'desc')
+        ->get();
+
+        //mode of payment
+        $mode_of_payment = Payments::select('mode_of_payment',DB::raw('count(mode_of_payment) as count'))
+        ->groupBy('mode_of_payment')
+        ->orderBy(DB::raw('count(mode_of_payment)'),'desc')
+        ->get();
+
+
         // dd($month,$count);
         return view('dashboard.dashboard',[
             'payments' => $payments,
             'verified' => $verified,
             'php' => $php,
             'usd' => $usd,
+            'employees' => $employees,
+            'mode_of_payment' => $mode_of_payment,
         ],compact('data','options'));
     }
 }

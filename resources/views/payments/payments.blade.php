@@ -42,7 +42,7 @@
           </p>
         </div>
       </div>
-      <div class="px-8 py-4 sm:px-10 w-full  text-[#0d0f0d] uppercase border-l-2 ">
+      <div class="px-8 py-4 sm:px-10 w-full  text-[#0d0f0d] uppercase sm:border-l-2 ">
         <form method="POST" action="{{route('payments.store')}}" enctype="multipart/form-data"  >
           @csrf
           
