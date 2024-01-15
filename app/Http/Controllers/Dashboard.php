@@ -60,7 +60,11 @@ class Dashboard extends Controller
             'plugins' => [
                 'title' => [
                     'display' => true,
-                    'text' => 'Chart.js Bar Chart',
+                    'text' => 'FB Payments Chart',
+                    'font'=> [
+                        'size'=>'20',
+                        'family' => 'Quicksand',
+                    ]
                 ],
                 'legend' => [
                     'position' => 'top',

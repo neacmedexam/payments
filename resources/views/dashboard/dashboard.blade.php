@@ -18,7 +18,14 @@
                     Home
                     </p>
                 </li>
-               
+                <li>
+                    <div class="flex items-center">
+                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-900 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                    <p class="ms-1 text-sm font-medium text-gray-900  md:ms-2 ">Dashboard</p>
+                    </div>
+                </li>
                 </ol>
             </nav>
   
@@ -40,11 +47,11 @@
                 </div>
                 <div class="flex flex-row justify-center items-center w-full h-full p-2">
                     <div class="w-full bg-[#ffffff] rounded-md p-4 mx-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
-                        <p class="text-2xl">Total Payments</p>
+                        <p class="text-2xl">Payments</p>
                         <p class="text-6xl font-medium text-center">{{$payments}}</p>
                     </div>
                     <div class="w-full bg-[#ffffff] rounded-md p-4 mx-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
-                        <p class="text-2xl">Total Verified Payments</p>
+                        <p class="text-2xl">Verified Payments</p>
                         <p class="text-6xl font-medium text-center">{{$verified}}</p>
                     </div>
                     <div class="w-full bg-[#ffffff] rounded-md p-4 mx-2 h-[150px] shadow-2xl transition-all duration-300 hover:scale-[1.02]">
@@ -109,11 +116,11 @@
                             </table>
                            
                         </div>
-                        <div class="bg-[#ffffff] p-4  rounded-md shadow-2xl h-full">
+                        {{-- <div class="bg-[#ffffff] p-4  rounded-md shadow-2xl h-full">
                             <p class="text-2xl pb-2">Mode of Payments</p>
                             
                            
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

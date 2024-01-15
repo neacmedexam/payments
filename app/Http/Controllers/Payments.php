@@ -20,6 +20,8 @@ class Payments extends Controller
         return view('payments.payments');
     }
 
+
+
     public function store(PaymentPostRequest $request){
 
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -92,15 +94,39 @@ class Payments extends Controller
         $getAll = ModelsPayments::select('*')->orderBy('id','desc')->simplePaginate(10);
         
 
-
+        // dd($getAll,compact('getAll'));
       
 
         return view('payments.index',[
             'record' => $getAll,
-        ]);
+        ])->render();
 
     }
    
+    public function search(Request $request){
+        $get = ModelsPayments::where('reference','like','%'.$request->search_string.'%')
+        ->orWhere('name','like','%'.$request->search_string.'%')
+        ->orWhere('facebook','like','%'.$request->search_string.'%')
+        ->orWhere('email','like','%'.$request->search_string.'%')
+        ->orWhere('contact_number','like','%'.$request->search_string.'%')
+        ->orWhere('service_availed','like','%'.$request->search_string.'%')
+        ->orWhere('mode_of_payment','like','%'.$request->search_string.'%')
+        ->orWhere('other_mop','like','%'.$request->search_string.'%')
+        ->orWhere('verified_by','like','%'.$request->search_string.'%')
+        ->orderBy('id','desc')
+        ->simplePaginate(10);
+        
+        if($get->count() >= 1){
+            return view('payments.table',[
+                'record' => $get,
+            ])->render();
+        }
+        else{
+            return response()->json([
+                'status' => 'nothing_found',
+            ]);
+        }
+    }
 
     public function edit($id){
         $getRecord = ModelsPayments::find($id);

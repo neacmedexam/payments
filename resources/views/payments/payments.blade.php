@@ -93,15 +93,35 @@
               @enderror
             </div>
           </div>
-          <div class="w-full mb-2 flex flex-col justify-between items-center">
-            <div class="w-full pr-2 mb-2">
-              <label class="block text-[#0d0f0d] text-sm font-bold mb-2" for="email">
-                  Service Availed<span class="text-xs text-red-600">*</span>
-              </label>
-              <input name="service_availed" value="{{old('service_availed')}}" class="text-sm shadow-lg appearance-none border rounded w-full py-2 px-3 text-[#0d0f0d] leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="eg. NCLEX">
+
+          <div class="w-full mb-2">
+            <label class="block uppercase tracking-wide text-[#0d0f0d] text-sm font-bold mb-2" for="mode_of_payment">
+              Service Availed<span class="text-xs text-red-600">*</span>
+            </label>
+            <div class=" pr-2">
+              <select name="service_availed" onChange="check(this);" class="text-sm block shadow-lg w-full bg-gray-100 border border-gray-200 text-[#0d0f0d] py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="mySelect">
+                <option value="" selected {{old('service_availed') == 'Select' ? 'selected' : ''}}>Select</option>
+                <option value="NCLEX US Pre-Eligibility"  {{old('service_availed') == 'NCLEX US Pre-Eligibility' ? 'selected' : ''}}>NCLEX US Pre-Eligibility</option>
+                <option value="NCLEX Canada Pre-Eligibility" {{old('service_availed') == 'NCLEX Canada Pre-Eligibility' ? 'selected' : ''}}>NCLEX Canada Pre-Eligibility</option>
+                <option value="NCLEX Australia Pre-Eligibility Service Fee" {{old('service_availed') == 'NCLEX Australia Pre-Eligibility Service Fee' ? 'selected' : ''}}>NCLEX Australia Pre-Eligibility Service Fee</option>
+                <option value="NMC UK Pre-assessment Fee" {{old('service_availed') == 'NMC UK Pre-assessment Fee' ? 'selected' : ''}}>NMC UK Pre-assessment Fee</option>
+                <option value="NMB Ireland Pre-assessment Fee" {{old('service_availed') == 'NMB Ireland Pre-assessment Fee' ? 'selected' : ''}}>NMB Ireland Pre-assessment Fee</option>
+                <option value="NC NZ Initial Fee" {{old('service_availed') == 'NC NZ Initial Fee' ? 'selected' : ''}}>NC NZ Initial Fee</option>
+                <option value="USRN License Renewal" {{old('service_availed') == 'USRN License Renewal' ? 'selected' : ''}}>USRN License Renewal</option>
+                <option value="PRC License Renewal" {{old('service_availed') == 'PRC License Renewal' ? 'selected' : ''}}>PRC License Renewal</option>
+                <option value="USRN License Endorsement" {{old('service_availed') == 'USRN License Endorsement' ? 'selected' : ''}}>USRN License Endorsement</option>
+                <option value="Score Transfer" {{old('service_availed') == 'Score Transfer' ? 'selected' : ''}}>Score Transfer</option>
+                <option value="Online Review" {{old('service_availed') == 'Online Review' ? 'selected' : ''}}>Online Review</option>
+                <option value="NPTE - US" {{old('service_availed') == 'NPTE - US' ? 'selected' : ''}}>NPTE - US</option>
+                <option value="Visa Screen" {{old('service_availed') == 'Visa Screen' ? 'selected' : ''}}>Visa Screen</option>
+                <option value="Certificate of Good Standing" {{old('service_availed') == 'Certificate of Good Standing' ? 'selected' : ''}}>Certificate of Good Standing</option>
+                <option value="License Verification" {{old('service_availed') == 'License Verification' ? 'selected' : ''}}>License Verification</option>
+              </select>
+           
               @error('service_availed')
                 <p class="text-red-600 text-xs whitespace-nowrap">{{$message}}</p>
               @enderror
+          
             </div>
           </div>
           <div class="w-full mb-2">
